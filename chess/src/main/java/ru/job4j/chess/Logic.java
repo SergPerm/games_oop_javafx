@@ -21,17 +21,15 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
-        boolean rsl = false;
         for (Cell cell: steps) {
-            try {
-                if (this.findBy(cell) >= 0) {
+            for (int index = 0; index != figures.length; index++) {
+                Figure figure = figures[index];
+                if (figure != null && figure.position().equals(cell)) {
                     throw new OccupiedCellException();
                 }
-            } catch (FigureNotFoundException e) {
-                rsl = true;
             }
         }
-        return rsl;
+        return true;
     }
 
     public void clean() {
